@@ -1,0 +1,25 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>メモリープレイヤー投稿サイト</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'memory/css/style.css' %}">
+    {% block extraheader %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand flex-md-row navbar-dark bg-dark">
+    <div class="container justify-content-between">
+        <a href="/" id="top_link" class="navbar-brand">メモリープレイヤー投稿サイト</a>
+        {% block container %}{% endblock %}
+    </div>
+</nav>
+<main>
+    <div class="container">
+        {% block main %}{% endblock %}
+    </div>
+</main>
+</body>
+</html>

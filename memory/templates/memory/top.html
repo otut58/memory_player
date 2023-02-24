@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+<!--{% load static %}-->
+
+{% block container%}
+    <a class="btn btn-primary" href="{% url 'memory_new' %}">投稿</a>
+{% endblock %}
+
+{% block main %}
+<div class="welcome">
+    <h1 class="title">メモリープレイヤー投稿サイト</h1>
+    <p class="subtitle">メモリーを見て上達しよう！</p>
+    <a class="btn btn-primary" href="{% url 'memory_new' %}">メモリーを投稿する</a>
+</div>
+
+
+{% if searchForm %}
+<div>
+    <form action="{% url 'top' %}" method="get">
+        <div class="tag">
+            {{ searchForm }}
+            <input type="submit" value="検索">
+            <a href="{% url 'top' %}">クリア</a>
+        </div>
+    </form>
+</div>
+{% endif %}
+
+{% if memories %}
+<table class = "table">
+    <thread>
+    <tr>
+        <th>XP</th>
+        <th>タイトル</th>
+        <th>ブキ</th>
+        <th>ステージ</th>
+        <th>ルール</th>
+    </tr>
+    </thread>
+    <tbody id="memory-container">
+        {% for memory in memories %}
+        <tr>
+            <td>{{ memory.xp }}</td>
+            <td><a href="{% url 'memory_detail' memory.id %}">{{ memory.title }}</a></td>
+            <td>{{ memory.weapon }}</td>
+            <td>{{ memory.stage }}</td>
+            <td>{{ memory.rule }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>メモリーはありません</p>
+{% endif %}
+<!--<script src="{% static 'memory/js/memory_info.js' %}"></script>追加-->
+{% endblock %}

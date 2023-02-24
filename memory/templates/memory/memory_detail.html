@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block container %}
+    <a class="btn btn-primary" href="{% url 'top' %}">一覧</a>    
+{% endblock %}
+
+{% block main %}
+<div class="detail">
+    <h2>XP{{ memory.xp }} : {{ memory.title }}</h2>
+    <p> {{ memory.memory_num }}</p>
+    <p> {{ memory.comment }}</p>
+</div>
+<!--追加ここから-->
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">視聴者コメント：最新の10件</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vc in new_v_comment %}  
+            <tr>
+                <!--<th scope="row">{{ forloop.counter }}</th>-->
+                <td>{{ vc }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form class="viewerform" action="{% url 'comment_create' memory.id %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <div>
+        <button id="soshin" class="btn btn-primary" type="submit">送信</button>
+        </div>
+    </form>
+</div>
+
+<!--追加ここまで-->
+<div>
+    <a class="btn btn-primary" href="{% url 'top' %}">戻る</a>
+</div>
+{% endblock %}

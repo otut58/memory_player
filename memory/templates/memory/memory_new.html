@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block container %}
+    <a class="btn btn-primary" href="{% url 'top' %}">一覧</a>    
+{% endblock %}
+
+{% block main %}
+<h2>メモリーの投稿</h2>
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button button_type="submit" content="投稿" %}
+</form>
+{% endblock %}
